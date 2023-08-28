@@ -12,7 +12,11 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        // get all todos
+        $todos = Todo::all();
+
+        // return the todos as JSON
+        return response()->json($todos, 200);
     }
 
     /**
@@ -28,7 +32,28 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//
+        // validate the request
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'task_category_id' => 'required|integer',
+        ]);
+
+        // get the authenticated user
+        $user = auth()->user();
+
+        // create a new todo
+        $todo = Todo::create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'task_category_id' => $request->task_category_id,
+            'due_date' => $request->due_date ?? null,
+        ]);
+
+        // return the todo as JSON
+        return response()->json($todo, 201);
     }
 
     /**
