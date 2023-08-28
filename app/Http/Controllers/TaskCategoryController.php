@@ -12,7 +12,11 @@ class TaskCategoryController extends Controller
      */
     public function index()
     {
-        //
+        // get all task categories
+        $taskCategories = TaskCategory::all();
+
+        // return the task categories as JSON
+        return response()->json($taskCategories, 200);
     }
 
     /**
@@ -20,7 +24,7 @@ class TaskCategoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,7 +32,19 @@ class TaskCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//
+        // validate the request
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        // create a new task category
+        $taskCategory = TaskCategory::create([
+            'name' => $request->name,
+        ]);
+
+        // return the task category as JSON
+        return response()->json($taskCategory, 201);
     }
 
     /**
