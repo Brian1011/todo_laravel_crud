@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     // Function to handle user registration
     public function register(Request $request)
     {
-        // Validate the request data
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json(
+                ['errors' => $validator->errors()->all()], 422);
+        }
 
         // Create and save the user
         $user = new User([
@@ -26,8 +32,9 @@ class AuthController extends Controller
         ]);
         $user->save();
 
-        // Return a response indicating successful registration
-        return response()->json(['message' => 'User registered successfully'], 201);
+        // return user details and access token
+        $token = $user->createToken('Personal Access Token')->accessToken;
+        return response()->json(['user' => $user, 'access_token' => $token], 201);
     }
 
     // Function to handle user login
