@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskCategoryController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Http\Request;
@@ -25,9 +26,9 @@ Route::apiResource('task-categories', TaskCategoryController::class)->middleware
 Route::apiResource('todos', TodoController::class)->middleware('auth:passport');
 
 // create an endpoint for registering a new user
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [AuthController::class, 'register']);
 // create an endpoint for logging in a user
-Route::post('login', [UserController::class, 'login']);
+Route::post('login', [AuthController::class, 'login']);
 // create an endpoint for logging out a user
-Route::post('logout', [UserController::class, 'logout'])->middleware('auth:passport');
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:passport');
 
