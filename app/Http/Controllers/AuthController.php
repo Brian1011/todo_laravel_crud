@@ -77,5 +77,18 @@ class AuthController extends Controller
         // Return a response indicating successful logout
         return response()->json(['message' => 'User logged out successfully'], 200);
     }
+
+    // get user
+    // Function to get authenticated user's information
+    public function getUser(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            return response()->json(['user' => $user], 200);
+        } else {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    }
 }
 

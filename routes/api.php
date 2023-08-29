@@ -22,8 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // create endpoints for task categories, todos, and users
-Route::apiResource('task-categories', TaskCategoryController::class)->middleware('auth:passport');
-Route::apiResource('todos', TodoController::class)->middleware('auth:passport');
+Route::middleware('auth:api')->group(function () {
+    // Protected API routes here
+    Route::get('user', [AuthController::class, 'getUser']);
+    Route::resource('task-categories', TaskCategoryController::class);
+    Route::resource('todos', TodoController::class);
+});
+
 
 // create an endpoint for registering a new user
 Route::post('register', [AuthController::class, 'register']);
