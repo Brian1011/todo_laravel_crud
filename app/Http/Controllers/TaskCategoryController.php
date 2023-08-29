@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TaskCategoryController extends Controller
 {
@@ -33,10 +34,15 @@ class TaskCategoryController extends Controller
     public function store(Request $request)
     {
 //
-        // validate the request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json(
+                ['errors' => $validator->errors()->all()], 422);
+        }
 
         // create a new task category
         $taskCategory = TaskCategory::create([

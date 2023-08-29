@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(function () {
     // Protected API routes here
     Route::get('user', [AuthController::class, 'getUser']);
-    Route::resource('task-categories', TaskCategoryController::class);
+    Route::apiResource('task-categories', TaskCategoryController::class);
     Route::resource('todos', TodoController::class);
 });
 

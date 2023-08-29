@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
 {
@@ -32,13 +33,17 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-//
-        // validate the request
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'description' => 'required|string',
             'task_category_id' => 'required|integer',
         ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json(
+                ['errors' => $validator->errors()->all()], 422);
+        }
 
         // get the authenticated user
         $user = auth()->user();
