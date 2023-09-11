@@ -26,7 +26,7 @@ Route::middleware('auth:api')->group(function () {
     // Protected API routes here
     Route::get('user', [AuthController::class, 'getUser']);
     Route::apiResource('task-categories', TaskCategoryController::class);
-    Route::resource('todos', TodoController::class);
+    Route::resource('todo', TodoController::class);
 });
 
 

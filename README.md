@@ -64,3 +64,88 @@
         "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9....."
     }
 ```
+
+### Todo
+#### 1. Create Todo
+##### Request
+`POST /api/todo`
+
+##### Body
+```
+{
+    "title": "Todo 1",
+    "description": "Todo 1 description",
+    "category_id": 1,
+    "due_date": "1/11/2023"
+}
+```
+
+##### Response
+```
+{
+    "id": 1,
+    "title": "Todo 1",
+    "description": "Todo 1 description",
+    "category_id": 1,
+    "due_date": "2023-11-01",
+    "user_id": 1,
+    "updated_at": "2023-09-11T11:32:37.000000Z",
+    "created_at": "2023-09-11T11:32:37.000000Z"
+}
+```
+
+#### 2. Update Todo
+##### Request
+`PUT /api/todo/{id}`
+##### Body
+```
+{
+    "title": "Todo 1",
+    "description": "Todo 1 description",
+    "category_id": 1,
+    "due_date": "1/11/2023"
+}
+```
+
+##### Response
+```
+{
+    "id": 1,
+    "title": "Todo 1",
+    "description": "Todo 1 description",
+    "category_id": 1,
+    "due_date": "2023-11-01",
+    "user_id": 1,
+    "updated_at": "2023-09-11T11:32:37.000000Z",
+    "created_at": "2023-09-11T11:32:37.000000Z"
+}
+```
+
+#### 3. Delete Todo
+##### Request
+`DELETE /api/todo/{id}`
+##### Response
+```
+{
+    "message": "Todo deleted successfully"
+}
+```
+
+#### 4. Get List of Todo
+##### Request
+`GET /api/todo/`
+##### Response
+```
+    [
+        {
+            "id": 1,
+            "title": "Todo 1",
+            "description": "Todo 1 description",
+            "category_id": 1,
+            "due_date": "2023-11-01",
+            "user_id": 1,
+            "updated_at": "2023-09-11T11:32:37.000000Z",
+            "created_at": "2023-09-11T11:32:37.000000Z"
+        }
+    ]
+```

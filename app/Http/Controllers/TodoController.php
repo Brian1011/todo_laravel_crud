@@ -34,9 +34,9 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'title' => 'required|string',
             'description' => 'required|string',
-            'task_category_id' => 'required|integer',
+            'category_id' => 'required|integer',
         ]);
 
         // Check if validation fails
@@ -51,9 +51,9 @@ class TodoController extends Controller
         // create a new todo
         $todo = Todo::create([
             'user_id' => $user->id,
-            'name' => $request->name,
+            'title' => $request->title,
             'description' => $request->description,
-            'task_category_id' => $request->task_category_id,
+            'task_category_id' => $request->category_id,
             'due_date' => $request->due_date ?? null,
         ]);
 
