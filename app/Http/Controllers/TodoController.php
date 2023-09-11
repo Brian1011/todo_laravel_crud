@@ -54,8 +54,12 @@ class TodoController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'task_category_id' => $request->category_id,
+            'completed' => $request->completed ?? false,
             'due_date' => $request->due_date ?? null,
         ]);
+
+        // fetch the todo again to get the category
+        $todo = Todo::with('taskCategory')->find($todo->id);
 
         // return the todo as JSON
         return response()->json($todo, 201);

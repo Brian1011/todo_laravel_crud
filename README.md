@@ -66,7 +66,28 @@
 ```
 
 ### Todo
-#### 1. Create Todo
+#### 1. Create Todo Category
+##### Request
+`POST /api/todo-category`
+
+##### Body
+```
+{
+    "name": "individual"
+}
+```
+
+##### Response
+```
+{
+    "id": 1,
+    "name": "individual",
+    "created_at": "2023-09-11T11:31:45.000000Z",
+    "updated_at": "2023-09-11T11:31:45.000000Z"
+}
+```
+
+#### 2. Create Todo
 ##### Request
 `POST /api/todo`
 
@@ -83,18 +104,26 @@
 ##### Response
 ```
 {
-    "id": 1,
-    "title": "Todo 1",
-    "description": "Todo 1 description",
-    "category_id": 1,
-    "due_date": "2023-11-01",
+    "id": 5,
     "user_id": 1,
-    "updated_at": "2023-09-11T11:32:37.000000Z",
-    "created_at": "2023-09-11T11:32:37.000000Z"
+    "task_category_id": 1,
+    "title": "Task 1",
+    "description": "Task description",
+    "due_date": "2023-01-11T00:00:00.000000Z",
+    "completed": 0,
+    "completed_at": null,
+    "created_at": "2023-09-11T11:49:56.000000Z",
+    "updated_at": "2023-09-11T11:49:56.000000Z",
+    "task_category": {
+        "id": 1,
+        "name": "individual",
+        "created_at": "2023-09-11T11:31:45.000000Z",
+        "updated_at": "2023-09-11T11:31:45.000000Z"
+    }
 }
 ```
 
-#### 2. Update Todo
+#### 3. Update Todo
 ##### Request
 `PUT /api/todo/{id}`
 ##### Body
@@ -103,6 +132,7 @@
     "title": "Todo 1",
     "description": "Todo 1 description",
     "category_id": 1,
+    "completed": 1,
     "due_date": "1/11/2023"
 }
 ```
@@ -115,13 +145,14 @@
     "description": "Todo 1 description",
     "category_id": 1,
     "due_date": "2023-11-01",
+    "completed": 1,
     "user_id": 1,
     "updated_at": "2023-09-11T11:32:37.000000Z",
     "created_at": "2023-09-11T11:32:37.000000Z"
 }
 ```
 
-#### 3. Delete Todo
+#### 4. Delete Todo
 ##### Request
 `DELETE /api/todo/{id}`
 ##### Response
@@ -131,7 +162,7 @@
 }
 ```
 
-#### 4. Get List of Todo
+#### 5. Get List of Todo
 ##### Request
 `GET /api/todo/`
 ##### Response
@@ -139,13 +170,27 @@
     [
         {
             "id": 1,
-            "title": "Todo 1",
-            "description": "Todo 1 description",
-            "category_id": 1,
-            "due_date": "2023-11-01",
             "user_id": 1,
-            "updated_at": "2023-09-11T11:32:37.000000Z",
-            "created_at": "2023-09-11T11:32:37.000000Z"
+            "task_category_id": 1,
+            "title": "Task 1",
+            "description": "Task description",
+            "due_date": "2023-01-11T00:00:00.000000Z",
+            "completed": 0,
+            "completed_at": null,
+            "created_at": "2023-09-11T11:36:40.000000Z",
+            "updated_at": "2023-09-11T11:36:40.000000Z"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "task_category_id": 1,
+            "title": "Task 1",
+            "description": "Task description",
+            "due_date": "2023-01-11T00:00:00.000000Z",
+            "completed": 0,
+            "completed_at": null,
+            "created_at": "2023-09-11T11:45:41.000000Z",
+            "updated_at": "2023-09-11T11:45:41.000000Z"
         }
-    ]
+    ]   
 ```

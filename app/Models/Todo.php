@@ -18,6 +18,7 @@ class Todo extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'completed',
         'description',
         'task_category_id',
         'due_date',
