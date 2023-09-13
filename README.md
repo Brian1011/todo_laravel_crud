@@ -8,6 +8,8 @@
 7. Run `php artisan migrate` in the root directory
 8. Run `php artisan passport:install` in the root directory
 9. Run `php artisan serve` in the root directory
+10. Run `php artisan serve --host 192.168.0.1` in the root directory to serve the application on a local network.
+Change `192.168.0.1` to your local ip address
 
 ## API DOCUMENTATION
 ### Authentication
